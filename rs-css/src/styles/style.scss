@@ -1,1 +1,117 @@
-@import 'normalize.css';
+// @import 'normalize.css';
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Caveat', cursive;
+  box-sizing: border-box;
+}
+
+.page {
+  background-size: 80vw 80vh;
+  // border: solid 3px #c0392b;
+  // margin: 15px 40px;
+  margin: 15px 0px;
+  display: grid;
+  grid-template-areas: 
+    'header header header header header'
+    'main main main level level'
+    'footer footer footer footer footer';
+}
+
+.header {
+  grid-area: header;
+  padding: 5px 40px;
+  border-bottom: solid 3px #c0392b;
+}
+
+.header_title {
+  font-size: 45px;
+}
+
+.game {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.view {
+  text-align: center;
+}
+
+.view_task {
+  font-size: 50px;
+  font-weight: 400;
+  margin-top: 25px;
+}
+
+.view_game {
+  margin-top: 15px;
+  width: 500px;
+  height: 200px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.view_square {
+  width: 95px;
+  height: 95px;
+  border: 3px solid #16a085
+}
+
+
+.game-field {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.game-field_title {
+  font-size: 32px;
+  background-color: #f7dc6f;
+}
+
+.html-viewer {
+  background-color: #fffcee;
+}
+
+.code {
+  list-style: none;
+  counter-reset: my-counter;
+  font-size: 22px;
+}
+.code-line * {
+  font-family: monospace;
+}
+.code-line {
+  counter-increment: my-counter;
+  padding: 3px 0px;
+}
+
+.code-line::before {
+  content: counter(my-counter);
+  margin-right: 4px;
+  background-color: #eae8da;
+  display: inline-block;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  font-family: monospace;
+}
+
+.code-line_content {
+  font-family: monospace;
+}
+
+.level {
+  grid-area: level;
+  border-left: solid 3px #c0392b;
+}
+.footer {
+  grid-area: footer;
+}
