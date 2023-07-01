@@ -1,9 +1,14 @@
 // @import 'normalize.css';
 $border: #c0392b;
-$square-green: #16a085;
+$square-green-light: #e8f8f5  ;
+$square-green-dark: #0e6655 ;
 $code-line-title: #f7dc6f;
 $code-line: #fffcee;
 $code-line-number: #eae8da;
+$code-line-number-dark: #cbcabf;
+$background-color-steaker-view-light: #d6eaf8;
+$background-color-steaker-view-dark: #aed6f1;
+$shadow: #abb2b9;
 
 * {
   margin: 0px;
@@ -14,7 +19,7 @@ $code-line-number: #eae8da;
 
 .page {
   max-width: 1250px;
-  // background-size: 80vw 80vh;
+  background-size: 80vw 80vh;
   margin: 15px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
@@ -46,13 +51,20 @@ $code-line-number: #eae8da;
 }
 
 .view {
+  margin-top: 25px;
   text-align: center;
+  background-color: $background-color-steaker-view-light;
+  border-radius: 5px;
+  box-shadow: $shadow 2.5px 10px 15px;
 }
 
 .view_task {
   font-size: 50px;
   font-weight: 400;
-  margin-top: 25px;
+  background-color: $background-color-steaker-view-dark;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  opacity: 0.7;
 }
 
 .view_game {
@@ -60,14 +72,18 @@ $code-line-number: #eae8da;
   width: 500px;
   height: 200px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  column-gap: 20px;
 }
 
 .view_square {
   width: 95px;
   height: 95px;
-  border: 3px solid $square-green;
+  background-color: $square-green-light;
+  border: 3px solid $square-green-dark;
+  border-radius: 3px;
+  opacity: 0.9;
 }
 
 
@@ -120,7 +136,9 @@ $code-line-number: #eae8da;
 .comment {
   opacity: 0.5;
 }
+
 .answer {
+  width: 65%;
   font-family: monospace;
   background-color: transparent;
   font-size: 1em;
@@ -136,6 +154,20 @@ $code-line-number: #eae8da;
   }
 }
 
+.answer-submit {
+  width: 65px;
+  height: 30px;
+  font-size: 1em;
+  text-align: center;
+  background-color: $code-line-number;
+  border: 2px solid $code-line-number-dark;
+  box-shadow: 1px 1px 2px $code-line-number-dark;
+  cursor: pointer;
+
+  &:active {
+    box-shadow: 0px 0px 0px;
+  }
+}
 
 .footer {
   grid-area: footer;
