@@ -1,5 +1,5 @@
 import './styles/style.scss';
-import tags from './Level1/level1';
+import { tags, level1 } from './Level/Level1/level1';
 
 // const mainBackground = String(require('./assets/img/main_background.jpg'));
 
@@ -7,7 +7,8 @@ import tags from './Level1/level1';
 // page.style.backgroundImage = `url(${mainBackground})`;
 
 const view = <HTMLElement>document.querySelector('.view_game');
-const code = <HTMLElement>document.querySelector('.code');
+const code = <HTMLElement>document.querySelector('.html-viewer .code');
+const level = <HTMLElement>document.querySelector('.level-container');
 
 for (let i = 0; i < tags.length; i += 1) {
   const li = <HTMLElement>document.createElement('li');
@@ -16,3 +17,4 @@ for (let i = 0; i < tags.length; i += 1) {
   li.append(tags[i].htmlCode);
   code.append(li);
 }
+level.append(level1);

@@ -1,4 +1,9 @@
 // @import 'normalize.css';
+$border: #c0392b;
+$square-green: #16a085;
+$code-line-title: #f7dc6f;
+$code-line: #fffcee;
+$code-line-number: #eae8da;
 
 * {
   margin: 0px;
@@ -8,21 +13,21 @@
 }
 
 .page {
-  background-size: 80vw 80vh;
-  // border: solid 3px #c0392b;
-  // margin: 15px 40px;
-  margin: 15px 0px;
+  max-width: 1250px;
+  // background-size: 80vw 80vh;
+  margin: 15px auto;
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
   grid-template-areas: 
     'header header header header header'
-    'main main main level level'
+    'main main main main level'
     'footer footer footer footer footer';
 }
 
 .header {
   grid-area: header;
-  padding: 5px 40px;
-  border-bottom: solid 3px #c0392b;
+  padding: 5px 20px;
+  border-bottom: solid 3px $border;
 }
 
 .header_title {
@@ -30,11 +35,14 @@
 }
 
 .game {
+  padding-left: 20px;
   grid-area: main;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-right: solid 3px $border;
+
 }
 
 .view {
@@ -51,7 +59,6 @@
   margin-top: 15px;
   width: 500px;
   height: 200px;
-  background-color: #ffffff;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -60,12 +67,12 @@
 .view_square {
   width: 95px;
   height: 95px;
-  border: 3px solid #16a085
+  border: 3px solid $square-green;
 }
 
 
 .game-field {
-  margin-top: 15px;
+  margin-top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
@@ -73,17 +80,19 @@
 
 .game-field_title {
   font-size: 32px;
-  background-color: #f7dc6f;
+  background-color: $code-line-title;
 }
 
-.html-viewer {
-  background-color: #fffcee;
+.html-viewer,
+.css-editor {
+  background-color: $code-line;
+  margin: 2px;
 }
 
 .code {
   list-style: none;
   counter-reset: my-counter;
-  font-size: 22px;
+  font-size: 20px;
 }
 .code-line * {
   font-family: monospace;
@@ -91,12 +100,13 @@
 .code-line {
   counter-increment: my-counter;
   padding: 3px 0px;
+  font-family: monospace;
 }
 
 .code-line::before {
   content: counter(my-counter);
   margin-right: 4px;
-  background-color: #eae8da;
+  background-color: $code-line-number;
   display: inline-block;
   text-align: center;
   width: 30px;
@@ -107,11 +117,26 @@
 .code-line_content {
   font-family: monospace;
 }
-
-.level {
-  grid-area: level;
-  border-left: solid 3px #c0392b;
+.comment {
+  opacity: 0.5;
 }
+.answer {
+  font-family: monospace;
+  background-color: transparent;
+  font-size: 1em;
+  border: 0px;
+  outline: none;
+  &:focus {
+    background-color: transparent;
+    border: 0px;
+  }
+  &:active {
+    background-color: transparent;
+    border: 0px;
+  }
+}
+
+
 .footer {
   grid-area: footer;
 }

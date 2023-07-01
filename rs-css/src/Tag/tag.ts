@@ -20,7 +20,6 @@ class Tag {
   private createHtml(): HTMLElement {
     const htmlTag = document.createElement('span');
     htmlTag.classList.add('code-line_content');
-    console.log(this.tagOpenedString);
     htmlTag.append(this.tagOpenedString);
     htmlTag.append(this.tagClosedString);
     return htmlTag;

@@ -1,0 +1,84 @@
+$background-color-steaker-task-light: #F7DC6F;
+$background-color-steaker-task-dark: #F4D03F;
+$background-color-steaker-examples-light: #D7BDE2;
+$background-color-steaker-examples-dark: #C39BD3;
+$shadow: #ABB2B9;
+$header: #A93226; 
+
+.level-container {
+  padding-left: 10px;
+  padding-right: 20px;
+  font-size: 23px;
+}
+.level {
+  grid-area: level;
+}
+
+.level_progress-header {
+  margin-top: 15px;
+  font-size: 32px;
+  opacity: 0.7;
+}
+
+.level_header,
+.level_subheader {
+  margin-top: 15px;
+  font-size: 1.4em;
+  opacity: 0.7;
+}
+
+.level_task {
+  background-color: $background-color-steaker-task-light;
+  border-radius: 5px;
+  box-shadow: $shadow 2.5px 10px 15px;
+}
+.level_header {
+  background-color: $background-color-steaker-task-dark;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.level_header,
+.level_task-name,
+.level_selector,
+.level_content {
+  padding: 0px 5px;
+}
+
+.level_task-name {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: $header;
+}
+
+.level_selector {
+  width: 25px;
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+.level_content__highlight {
+  font-weight: 600;
+  color: $header;
+  
+}
+
+.level_examples {
+  margin-top: 35px;
+  background-color: $background-color-steaker-examples-light;
+  border-radius: 5px;
+  box-shadow: $shadow 2.5px 10px 15px;
+}
+.level_subheader {
+  margin-bottom: 10px;
+  background-color: $background-color-steaker-examples-dark;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.line {
+  border: 1px solid black;
+  width: 90%;
+  opacity: 0.2;
+  margin-top: 5px;
+}
