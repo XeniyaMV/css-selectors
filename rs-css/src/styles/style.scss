@@ -80,18 +80,39 @@ $shadow: #abb2b9;
 .view_square {
   width: 95px;
   height: 95px;
+  position: relative;
   background-color: $square-green-light;
   border: 3px solid $square-green-dark;
   border-radius: 3px;
-  opacity: 0.9;
+  opacity: 0.7;
+  transition: opacity 0.4s, background-color 0.4s;
 }
 
+.view_element__active {
+  opacity: 1;
+  background-color: #ffffff;
+}
 
+.view_tag-name {
+  position: absolute;
+  width: 160px;
+  top: -38px;
+  left: 20px;
+  font-size: 23px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.view_tag-name__active {
+  opacity: 1;
+}
 .game-field {
   margin-top: 40px;
+  padding: 0px 5px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 100%;
+  column-gap: 10px;
 }
 
 .game-field_title {
@@ -102,16 +123,16 @@ $shadow: #abb2b9;
 .html-viewer,
 .css-editor {
   background-color: $code-line;
-  margin: 2px;
 }
 
 .code {
   list-style: none;
   counter-reset: my-counter;
-  font-size: 20px;
+  font-size: 16px;
 }
 .code-line * {
   font-family: monospace;
+  cursor: default;
 }
 .code-line {
   counter-increment: my-counter;
@@ -123,7 +144,9 @@ $shadow: #abb2b9;
   content: counter(my-counter);
   margin-right: 4px;
   background-color: $code-line-number;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   width: 30px;
   height: 30px;
@@ -131,26 +154,51 @@ $shadow: #abb2b9;
 }
 
 .code-line_content {
+  cursor: auto;
   font-family: monospace;
+  transition: opacity 0.2s;
 }
+
+.code-line_content__active {
+  opacity: 0.7;
+}
+
 .comment {
   opacity: 0.5;
 }
 
+@keyframes flashing {
+  from {background-color: transparent}
+  to {background-color: $background-color-steaker-view-dark}
+}
+
+
 .answer {
   width: 65%;
+  height: 25px;
   font-family: monospace;
   background-color: transparent;
   font-size: 1em;
   border: 0px;
+  border-radius: 2px;
   outline: none;
   &:focus {
     background-color: transparent;
     border: 0px;
   }
   &:active {
-    background-color: transparent;
     border: 0px;
+  }
+}
+
+.answer__animation {
+  animation: flashing;
+  animation-duration: 0.7s;
+  animation-iteration-count: infinite;
+  &:focus {
+    animation: flashing;
+    animation-duration: 0.7s;
+    animation-iteration-count: infinite;
   }
 }
 
