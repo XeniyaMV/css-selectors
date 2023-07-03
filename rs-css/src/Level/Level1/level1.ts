@@ -11,6 +11,7 @@ for (let i = 0; i < 3; i += 1) {
   const viewTag = document.createElement('div');
   const viewTagName = document.createElement('div');
   viewTag.classList.add('view_square');
+  viewTag.classList.add('view_element__animation');
   viewTagName.classList.add('view_tag-name');
   viewTag.append(viewTagName);
   const tag: Tag = new Tag('square', viewTag);

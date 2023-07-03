@@ -20,6 +20,7 @@ const viewTag2 = document.createElement('div');
 const viewTagName2 = document.createElement('div');
 viewTag2.classList.add('view_circle');
 viewTag2.classList.add('view_element__inside');
+viewTag2.classList.add('view_element__animation');
 viewTagName2.classList.add('view_tag-name');
 viewTag2.append(viewTagName2);
 const tag2: Tag = new Tag('circle', viewTag2);

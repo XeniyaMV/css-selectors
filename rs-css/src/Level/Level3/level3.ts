@@ -20,6 +20,7 @@ for (let i = 0; i < 3; i += 1) {
     tags.push(tagList);
   } else {
     viewTag.classList.add('view_circle__red');
+    viewTag.classList.add('view_element__animation');
     viewTagName.classList.add('view_tag-name');
     viewTag.append(viewTagName);
     const tag: Tag = new Tag('circle', viewTag, undefined, 'red');

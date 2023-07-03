@@ -177,6 +177,24 @@ $shadow: #abb2b9;
   height: 100%;
 }
 
+@keyframes element {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.view_element__animation {
+  animation: element;
+  animation-duration: 1.3s;
+  animation-iteration-count: infinite;
+}
+
 .view_element__active {
   opacity: 1;
   background-color: #ffffff;
