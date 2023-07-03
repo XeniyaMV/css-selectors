@@ -2,6 +2,7 @@ $background-color-steaker-task-light: #F7DC6F;
 $background-color-steaker-task-dark: #F4D03F;
 $background-color-steaker-examples-light: #D7BDE2;
 $background-color-steaker-examples-dark: #C39BD3;
+$background-color-burger-line: #16A085;
 $shadow: #ABB2B9;
 $header: #A93226; 
 
@@ -10,12 +11,23 @@ $header: #A93226;
   padding-right: 20px;
   font-size: 23px;
   grid-area: level;
+  position: relative;
 }
 
-.level_progress-header {
+.level_progress {
   margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.level_progress-header {
   font-size: 32px;
   opacity: 0.7;
+}
+.level_progress-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .progress {
   margin-right: 5px;
@@ -23,6 +35,47 @@ $header: #A93226;
 .check-icon {
   width: 30px;
   height: auto;
+}
+.icon-left,
+.icon-right {
+  width: 45px;
+}
+
+.icon-right {
+  transform: rotate(180deg);
+}
+
+.burger-menu {
+  z-index: 2;
+}
+.burger-menu__active {
+  .burger_line:first-child {
+    transform: translateY(5px) rotate(45deg);
+  }
+  .burger_line:nth-child(2) {
+    display: none;
+  }
+  .burger_line:last-child {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+}
+
+.burger_line {
+  width: 50px;
+  height: 5px;
+  background-color: $background-color-burger-line;
+  border: 1px solid #000000;
+  border-radius: 1px;
+  opacity: 0.7;
+  transition: transform 0.5s;
+}
+
+.burger_line:first-child {
+  margin-bottom: 4px;
+}
+
+.burger_line:last-child {
+  margin-top: 4px;
 }
 
 .level_header,
@@ -52,6 +105,7 @@ $header: #A93226;
 
 .level_task-name {
   margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 1.2em;
   color: $header;
 }
@@ -59,12 +113,14 @@ $header: #A93226;
 .level_selector {
   width: 25px;
   margin-left: 5px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
 .level_content__highlight {
   font-weight: 600;
   color: $header;
+  white-space: nowrap;
   
 }
 

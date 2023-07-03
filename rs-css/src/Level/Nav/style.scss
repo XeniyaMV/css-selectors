@@ -1,0 +1,16 @@
+.level-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  background-color: #ffffff;
+  transition: height 0.5s;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.level-nav__active {
+  height: 100%;
+}

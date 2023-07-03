@@ -77,7 +77,8 @@ $shadow: #abb2b9;
   column-gap: 20px;
 }
 
-.view_square {
+.view_square,
+.view_square__yellow {
   width: 95px;
   height: 95px;
   position: relative;
@@ -88,6 +89,11 @@ $shadow: #abb2b9;
   transition: opacity 0.4s, background-color 0.4s;
 }
 
+.view_square__yellow {
+  border: 3px solid $code-line-title;
+  background-color: $code-line;
+}
+
 .view_element__active {
   opacity: 1;
   background-color: #ffffff;
@@ -95,7 +101,8 @@ $shadow: #abb2b9;
 
 .view_tag-name {
   position: absolute;
-  width: 160px;
+  width: 300px;
+  text-align: left;
   top: -38px;
   left: 20px;
   font-size: 23px;
@@ -113,6 +120,23 @@ $shadow: #abb2b9;
   grid-template-columns: 1fr 1fr;
   width: 100%;
   column-gap: 10px;
+}
+
+@keyframes mistake {
+  0% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translate(-10px);
+  }
+  100% {
+    transform: translate(5px);
+  }
+}
+.game-field__mistake {
+  animation: mistake;
+  animation-duration: 150ms;
+  animation-iteration-count: 3;
 }
 
 .game-field_title {
@@ -168,8 +192,17 @@ $shadow: #abb2b9;
 }
 
 @keyframes flashing {
-  from {background-color: transparent}
-  to {background-color: $background-color-steaker-view-dark}
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: $background-color-steaker-view-dark;
+    opacity: 0.5;
+  }
+  100% {
+    background-color: transparent;
+    opacity: 1;
+  }
 }
 
 
@@ -193,12 +226,14 @@ $shadow: #abb2b9;
 
 .answer__animation {
   animation: flashing;
-  animation-duration: 0.7s;
+  animation-duration: 1.2s;
   animation-iteration-count: infinite;
+
   &:focus {
     animation: flashing;
-    animation-duration: 0.7s;
+    animation-duration: 1.2s;
     animation-iteration-count: infinite;
+
   }
 }
 

@@ -1,74 +1,75 @@
 import './styles/style.scss';
-import { tags, level1 } from './Level/Level1/level1';
-import LevelTaskNames from './Level/level-task-names';
-import LevelTaskAnswers from './Level/level-task-answers';
 
-// const mainBackground = String(require('./assets/img/main_background.jpg'));
-const check = String(require('./assets/img/check.png'));
+import {
+  levelHeaderHtml,
+  currentValues,
+} from './Level/LevelHeader/level-header';
+import levelNavHTML from './Level/Nav/open-nav';
+import levels from './Level/LevelsContainer/levels-container';
+import getCheckImg from './utils/getCheckImg';
+import drawMainPage from './utils/drawMainPage';
 
-// const page = <HTMLElement>document.querySelector('.page');
-// page.style.backgroundImage = `url(${mainBackground})`;
-
-const view = <HTMLElement>document.querySelector('.view_game');
-const viewTask = <HTMLElement>document.querySelector('.view_task');
-const code = <HTMLElement>document.querySelector('.html-viewer .code');
 const level = <HTMLElement>document.querySelector('.level-container');
 const answer = <HTMLInputElement>document.querySelector('.answer');
 const answerSubmit = <HTMLElement>document.querySelector('.answer-submit');
 
-viewTask.textContent = LevelTaskNames.LevelTask1;
-view.innerHTML = '';
-code.innerHTML = '';
-level.innerHTML = '';
+level.append(levelNavHTML);
+level.append(levelHeaderHtml);
 
-for (let i = 0; i < tags.length; i += 1) {
-  const li = <HTMLElement>document.createElement('li');
-  li.classList.add('code-line');
-  view.append(tags[i].img);
-  li.append(tags[i].htmlCode);
-  code.append(li);
-}
-level.append(level1);
+const progress = <HTMLElement>levelHeaderHtml.querySelector('.progress');
+progress.textContent = `Level ${1} of ${levels.length}`;
+
+drawMainPage(currentValues.currentLevel);
 
 answerSubmit.addEventListener('click', () => {
-  if (answer.value.trim().toLowerCase() === LevelTaskAnswers.LevelTask1) {
-    console.log('good!');
+  const gameField = <HTMLElement>document.querySelector('.game-field');
+  if (answer.value.trim().toLowerCase() === currentValues.currentLevel.answer) {
     const levelProgressHeader = <HTMLElement>(
       document.querySelector('.level_progress-header')
     );
     if (!levelProgressHeader.querySelector('img')) {
-      const img = document.createElement('img');
-      img.classList.add('check-icon');
-      img.alt = 'check';
-      img.src = check;
-      levelProgressHeader.append(img);
+      const imgProgress = getCheckImg();
+      const imgNav = getCheckImg();
+      levelProgressHeader.append(imgProgress);
+      currentValues.listItem.append(imgNav);
+      currentValues.currentLevel.isCompleted = true;
     }
   } else {
-    console.log('Oops..');
+    gameField.classList.add('game-field__mistake');
+    setTimeout(() => {
+      gameField.classList.remove('game-field__mistake');
+    }, 450);
   }
   answer.value = '';
 });
 
 answer.addEventListener('keypress', (event) => {
+  const gameField = <HTMLElement>document.querySelector('.game-field');
+  gameField.classList.remove('game-field__mistake');
   if (event.key === 'Enter') {
-    if (answer.value.trim().toLowerCase() === LevelTaskAnswers.LevelTask1) {
-      console.log('good!');
+    if (
+      answer.value.trim().toLowerCase() === currentValues.currentLevel.answer
+    ) {
       const levelProgressHeader = <HTMLElement>(
         document.querySelector('.level_progress-header')
       );
       if (!levelProgressHeader.querySelector('img')) {
-        const img = document.createElement('img');
-        img.classList.add('check-icon');
-        img.alt = 'check';
-        img.src = check;
-        levelProgressHeader.append(img);
+        const imgProgress = getCheckImg();
+        const imgNav = getCheckImg();
+        levelProgressHeader.append(imgProgress);
+        currentValues.listItem.append(imgNav);
+        currentValues.currentLevel.isCompleted = true;
       }
     } else {
-      console.log('Oops..');
+      gameField.classList.add('game-field__mistake');
+      setTimeout(() => {
+        gameField.classList.remove('game-field__mistake');
+      }, 450);
     }
     answer.value = '';
   }
 });
+
 answer.addEventListener('keyup', () => {
   if (answer.value !== '') {
     answer.classList.remove('answer__animation');
