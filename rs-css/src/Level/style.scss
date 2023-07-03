@@ -8,7 +8,7 @@ $header: #A93226;
 
 .level-container {
   padding-left: 10px;
-  padding-right: 20px;
+  padding-right: 10px;
   font-size: 23px;
   grid-area: level;
   position: relative;
@@ -23,6 +23,12 @@ $header: #A93226;
 .level_progress-header {
   font-size: 32px;
   opacity: 0.7;
+  @media screen and (max-width: 725px) {
+    font-size: 30px;
+  }
+  @media screen and (max-width: 520px) {
+    font-size: 25px;
+  }
 }
 .level_progress-navigation {
   display: flex;
@@ -38,7 +44,14 @@ $header: #A93226;
 }
 .icon-left,
 .icon-right {
+  cursor: pointer;
   width: 45px;
+  @media screen and (max-width: 725px) {
+    width: 35px;
+  }
+  @media screen and (max-width: 620px) {
+    width: 25px;
+  }
 }
 
 .icon-right {
@@ -46,6 +59,7 @@ $header: #A93226;
 }
 
 .burger-menu {
+  cursor: pointer;
   z-index: 2;
 }
 .burger-menu__active {
@@ -68,6 +82,13 @@ $header: #A93226;
   border-radius: 1px;
   opacity: 0.7;
   transition: transform 0.5s;
+
+  @media screen and (max-width: 725px) {
+    width: 35px;
+  }
+  @media screen and (max-width: 620px) {
+    width: 30px;
+  }
 }
 
 .burger_line:first-child {
@@ -111,7 +132,6 @@ $header: #A93226;
 }
 
 .level_selector {
-  width: 25px;
   margin-left: 5px;
   margin-bottom: 10px;
   font-weight: 600;

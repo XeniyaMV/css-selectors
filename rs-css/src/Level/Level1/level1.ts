@@ -1,10 +1,11 @@
 import Tag from '../../Tag/tag';
 import htmlToElement from '../../utils/htmlToElement';
+import TagList from '../../Tag/tag-list';
 
 const levelString = require('./level1.html');
 
 const level1 = htmlToElement(levelString.default);
-const tags: Tag[] = [];
+const tags: TagList[] = [];
 
 for (let i = 0; i < 3; i += 1) {
   const viewTag = document.createElement('div');
@@ -13,8 +14,9 @@ for (let i = 0; i < 3; i += 1) {
   viewTagName.classList.add('view_tag-name');
   viewTag.append(viewTagName);
   const tag: Tag = new Tag('square', viewTag);
+  const tagList = new TagList(tag);
   viewTagName.textContent = tag.htmlCodeString;
-  tags.push(tag);
+  tags.push(tagList);
 }
 
 export { tags, level1 };

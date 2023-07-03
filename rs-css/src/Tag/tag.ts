@@ -7,6 +7,10 @@ class Tag {
 
   public img: HTMLElement;
 
+  public openedTagHtml: HTMLElement;
+
+  public closedTagHtml: HTMLElement;
+
   private html: HTMLElement;
 
   constructor(name: string, img: HTMLElement, id?: string, className?: string) {
@@ -15,21 +19,65 @@ class Tag {
     this.id = id || '';
     this.img = img;
     this.html = this.createHtml();
+    this.openedTagHtml = this.tagOpened;
+    this.closedTagHtml = this.tagClosed;
     this.setImgEventListner();
+    this.setOpenedTagEventListner();
+    this.setClosedTagEventListner();
   }
 
-  private setImgEventListner(): void {
-    this.img.addEventListener('mouseover', () => {
+  private setOpenedTagEventListner(): void {
+    this.openedTagHtml.addEventListener('mouseover', () => {
       const tagName = this.img.querySelector('.view_tag-name');
       tagName?.classList.add('view_tag-name__active');
-      this.htmlCode.classList.add('code-line_content__active');
+      this.openedTagHtml.classList.add('code-line_content__active');
+      this.closedTagHtml.classList.add('code-line_content__active');
       this.img.classList.add('view_element__active');
     });
 
-    this.img.addEventListener('mouseleave', () => {
+    this.openedTagHtml.addEventListener('mouseleave', () => {
       const tagName = this.img.querySelector('.view_tag-name');
       tagName?.classList.remove('view_tag-name__active');
-      this.htmlCode.classList.remove('code-line_content__active');
+      this.openedTagHtml.classList.remove('code-line_content__active');
+      this.closedTagHtml.classList.remove('code-line_content__active');
+      this.img.classList.remove('view_element__active');
+    });
+  }
+
+  private setClosedTagEventListner(): void {
+    this.closedTagHtml.addEventListener('mouseover', () => {
+      const tagName = this.img.querySelector('.view_tag-name');
+      tagName?.classList.add('view_tag-name__active');
+      this.openedTagHtml.classList.add('code-line_content__active');
+      this.closedTagHtml.classList.add('code-line_content__active');
+      this.img.classList.add('view_element__active');
+    });
+
+    this.closedTagHtml.addEventListener('mouseleave', () => {
+      const tagName = this.img.querySelector('.view_tag-name');
+      tagName?.classList.remove('view_tag-name__active');
+      this.openedTagHtml.classList.remove('code-line_content__active');
+      this.closedTagHtml.classList.remove('code-line_content__active');
+      this.img.classList.remove('view_element__active');
+    });
+  }
+
+  private setImgEventListner(): void {
+    this.img.addEventListener('mouseover', (event) => {
+      event.stopPropagation();
+      const tagName = this.img.querySelector('.view_tag-name');
+      tagName?.classList.add('view_tag-name__active');
+      this.openedTagHtml.classList.add('code-line_content__active');
+      this.closedTagHtml.classList.add('code-line_content__active');
+      this.img.classList.add('view_element__active');
+    });
+
+    this.img.addEventListener('mouseout', (event) => {
+      event.stopPropagation();
+      const tagName = this.img.querySelector('.view_tag-name');
+      tagName?.classList.remove('view_tag-name__active');
+      this.openedTagHtml.classList.remove('code-line_content__active');
+      this.closedTagHtml.classList.remove('code-line_content__active');
       this.img.classList.remove('view_element__active');
     });
   }
@@ -37,8 +85,8 @@ class Tag {
   private createHtml(): HTMLElement {
     const htmlTag = document.createElement('span');
     htmlTag.classList.add('code-line_content');
-    htmlTag.append(this.tagOpenedString);
-    htmlTag.append(this.tagClosedString);
+    htmlTag.append(this.openedTagHtml);
+    htmlTag.append(this.closedTagHtml);
 
     htmlTag.addEventListener('mouseover', () => {
       const tagName = this.img.querySelector('.view_tag-name');
@@ -56,7 +104,7 @@ class Tag {
     return htmlTag;
   }
 
-  private get tagOpenedString(): HTMLElement {
+  private get tagOpened(): HTMLElement {
     const span = document.createElement('span');
     const spanTagName = document.createElement('span');
     const spanTagOpen = document.createElement('span');
@@ -64,6 +112,7 @@ class Tag {
     const spanTagAttributes = document.createElement('span');
     let tagAttributes = '';
 
+    span.classList.add('code-line_content');
     spanTagName.classList.add('tag-name');
     spanTagOpen.classList.add('tag-open');
     spanTagClose.classList.add('tag-close');
@@ -80,6 +129,7 @@ class Tag {
       tagAttributes = tagAttributes.concat(` class="${this.className}"`);
     }
     spanTagAttributes.textContent = tagAttributes;
+
     span.append(spanTagOpen);
     span.append(spanTagName);
     span.append(spanTagAttributes);
@@ -87,12 +137,13 @@ class Tag {
     return span;
   }
 
-  private get tagClosedString(): HTMLElement {
+  private get tagClosed(): HTMLElement {
     const span = document.createElement('span');
     const spanTagName = document.createElement('span');
     const spanTagOpen = document.createElement('span');
     const spanTagClose = document.createElement('span');
 
+    span.classList.add('code-line_content');
     spanTagName.classList.add('tag-name');
     spanTagOpen.classList.add('tag-open');
     spanTagClose.classList.add('tag-close');

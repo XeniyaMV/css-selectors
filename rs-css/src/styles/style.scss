@@ -8,6 +8,10 @@ $code-line-number: #eae8da;
 $code-line-number-dark: #cbcabf;
 $background-color-steaker-view-light: #d6eaf8;
 $background-color-steaker-view-dark: #aed6f1;
+$link: #a569bd;
+$link-hover: #45b39d;
+$tag-color: #0271bb;
+$corner-bracket-color: #98abb8;
 $shadow: #abb2b9;
 
 * {
@@ -18,7 +22,7 @@ $shadow: #abb2b9;
 }
 
 .page {
-  max-width: 1250px;
+  max-width: 1230px;
   background-size: 80vw 80vh;
   margin: 15px auto;
   display: grid;
@@ -27,11 +31,25 @@ $shadow: #abb2b9;
     'header header header header header'
     'main main main main level'
     'footer footer footer footer footer';
+  @media screen and (max-width: 870px) {
+    grid-template-columns: 1fr 1fr 1fr 2fr;
+    grid-template-areas: 
+      'header header header header'
+      'main main main level'
+      'footer footer footer footer';
+  }
+  @media screen and (max-width: 610px) {
+    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-areas: 
+      'header header header'
+      'main main level'
+      'footer footer footer';
+  }
 }
 
 .header {
   grid-area: header;
-  padding: 5px 20px;
+  padding: 5px 10px;
   border-bottom: solid 3px $border;
 }
 
@@ -40,7 +58,7 @@ $shadow: #abb2b9;
 }
 
 .game {
-  padding-left: 20px;
+  padding-left: 10px;
   grid-area: main;
   display: flex;
   flex-direction: column;
@@ -56,29 +74,59 @@ $shadow: #abb2b9;
   background-color: $background-color-steaker-view-light;
   border-radius: 5px;
   box-shadow: $shadow 2.5px 10px 15px;
+  width: 500px;
+  min-height: 300px;
+  @media screen and (max-width: 870px) {
+    width: 85%;
+  }
+}
+
+.win-message {
+  margin-top: 50px;
+  font-size: 35px;
 }
 
 .view_task {
+  padding: 2px;
   font-size: 50px;
   font-weight: 400;
   background-color: $background-color-steaker-view-dark;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   opacity: 0.7;
+
+  @media screen and (max-width: 750px) {
+    font-size: 40px;
+  }
 }
 
 .view_game {
-  margin-top: 15px;
-  width: 500px;
-  height: 200px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 20px;
+  transition: opacity 0.5s;
+
+  @media screen and (max-width: 700px) {
+    column-gap: 10px;
+  }
+
+  @media screen and (max-width: 580px) {
+    margin-top: 20px;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+.view_game__completed {
+  opacity: 0;
 }
 
 .view_square,
-.view_square__yellow {
+.view_square__yellow,
+.view_square__red {
   width: 95px;
   height: 95px;
   position: relative;
@@ -87,11 +135,46 @@ $shadow: #abb2b9;
   border-radius: 3px;
   opacity: 0.7;
   transition: opacity 0.4s, background-color 0.4s;
+
+  @media screen and (max-width: 700px) {
+    width: 80px;
+    height: 80px;
+  }
 }
 
-.view_square__yellow {
+.view_circle,
+.view_circle__yellow,
+.view_circle__red {
+  width: 95px;
+  height: 95px;
+  position: relative;
+  background-color: $square-green-light;
+  border: 3px solid $square-green-dark;
+  border-radius: 50%;
+  opacity: 0.7;
+  transition: opacity 0.4s, background-color 0.4s;
+
+  @media screen and (max-width: 700px) {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.view_square__yellow,
+.view_circle__yellow {
   border: 3px solid $code-line-title;
   background-color: $code-line;
+}
+
+.view_circle__red,
+.view_square__red {
+  border: 3px solid $border;
+  background-color: $code-line;
+}
+
+.view_element__inside {
+  width: 100%;
+  height: 100%;
 }
 
 .view_element__active {
@@ -101,13 +184,19 @@ $shadow: #abb2b9;
 
 .view_tag-name {
   position: absolute;
-  width: 300px;
+  white-space: nowrap;
+  max-width: 300px;
   text-align: left;
   top: -38px;
   left: 20px;
   font-size: 23px;
   opacity: 0;
   transition: opacity 0.15s;
+  z-index: 3;
+  @media screen and (max-width: 980px) {
+    background-color: #ffffff;
+    border-radius: 5px;
+  }
 }
 
 .view_tag-name__active {
@@ -117,9 +206,21 @@ $shadow: #abb2b9;
   margin-top: 40px;
   padding: 0px 5px;
   display: grid;
+  justify-items: center;
   grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+  'css html';
   width: 100%;
   column-gap: 10px;
+  row-gap: 10px;
+
+  @media screen and (max-width: 870px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.5fr;
+    grid-template-areas: 
+    'html'
+    'css';
+  }
 }
 
 @keyframes mistake {
@@ -144,9 +245,22 @@ $shadow: #abb2b9;
   background-color: $code-line-title;
 }
 
+.html-viewer {
+  grid-area: html;
+}
+
+.css-editor {
+  grid-area: css;
+}
+
 .html-viewer,
 .css-editor {
   background-color: $code-line;
+  width: 100%;
+
+  @media screen and (max-width: 530px) {
+    width: 90%;
+  }
 }
 
 .code {
@@ -162,6 +276,10 @@ $shadow: #abb2b9;
   counter-increment: my-counter;
   padding: 3px 0px;
   font-family: monospace;
+  white-space: nowrap;
+  @media screen and (max-width: 540px) {
+    overflow: auto;
+  }
 }
 
 .code-line::before {
@@ -172,8 +290,8 @@ $shadow: #abb2b9;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 30px;
-  height: 30px;
+  width: 18px;
+  height: 18px;
   font-family: monospace;
 }
 
@@ -189,6 +307,10 @@ $shadow: #abb2b9;
 
 .comment {
   opacity: 0.5;
+  white-space: nowrap;
+  @media screen and (max-width: 540px) {
+    overflow: auto;
+  }
 }
 
 @keyframes flashing {
@@ -205,10 +327,23 @@ $shadow: #abb2b9;
   }
 }
 
+.tag-name {
+  color: $tag-color;
+}
+
+.tag-open,
+.tag-close {
+  color: $corner-bracket-color;
+}
+
+.tag-attributes {
+  color: $border;
+}
+
 
 .answer {
   width: 65%;
-  height: 25px;
+  height: 18px;
   font-family: monospace;
   background-color: transparent;
   font-size: 1em;
@@ -221,6 +356,10 @@ $shadow: #abb2b9;
   }
   &:active {
     border: 0px;
+  }
+
+  @media screen and (max-width: 965px) {
+    max-width: 60%;
   }
 }
 
@@ -239,7 +378,7 @@ $shadow: #abb2b9;
 
 .answer-submit {
   width: 65px;
-  height: 30px;
+  height: 20px;
   font-size: 1em;
   text-align: center;
   background-color: $code-line-number;
@@ -250,8 +389,48 @@ $shadow: #abb2b9;
   &:active {
     box-shadow: 0px 0px 0px;
   }
+
+  @media screen and (max-width: 965px) {
+    max-width: 50px;
+  }
 }
 
 .footer {
+  margin-top: 50px;
+  padding: 0px 10px;
   grid-area: footer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.contact-info {
+  width: 495px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+    row-gap: 5px;
+    justify-content: flex-start;
+  }
+}
+
+.school-info {
+  width: 90px;
+}
+
+.school-logo {
+  width: 100%;
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: none;
+  color: $link;
+
+  &:hover {
+    color: $link-hover;
+  }
 }

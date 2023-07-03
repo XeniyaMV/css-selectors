@@ -1,11 +1,10 @@
 import Tag from '../../Tag/tag';
-import TagList from '../../Tag/tag-list';
 import htmlToElement from '../../utils/htmlToElement';
 
-const levelString = require('./level2.html');
+const levelString = require('./level7.html');
 
-const level2 = htmlToElement(levelString.default);
-const tags: TagList[] = [];
+const level7 = htmlToElement(levelString.default);
+const tags: Tag[] = [];
 
 for (let i = 0; i < 3; i += 1) {
   const viewTag = document.createElement('div');
@@ -15,18 +14,16 @@ for (let i = 0; i < 3; i += 1) {
     viewTagName.classList.add('view_tag-name');
     viewTag.append(viewTagName);
     const tag: Tag = new Tag('square', viewTag);
-    const tagList = new TagList(tag);
     viewTagName.textContent = tag.htmlCodeString;
-    tags.push(tagList);
+    tags.push(tag);
   } else {
     viewTag.classList.add('view_square__yellow');
     viewTagName.classList.add('view_tag-name');
     viewTag.append(viewTagName);
     const tag: Tag = new Tag('square', viewTag, 'yellow');
-    const tagList = new TagList(tag);
     viewTagName.textContent = tag.htmlCodeString;
-    tags.push(tagList);
+    tags.push(tag);
   }
 }
 
-export { tags, level2 };
+export { tags, level7 };

@@ -1,9 +1,10 @@
-import Tag from '../../Tag/tag';
+// import Tag from '../../Tag/tag';
+import TagList from '../../Tag/tag-list';
 
 export default interface Level {
   levelHtml: HTMLElement;
-  tags: Tag[];
+  tags: TagList[];
   isCompleted: boolean;
-  answer: string;
+  answer: string[];
   taskName: string;
 }

@@ -18,6 +18,7 @@ const navList: NodeListOf<HTMLLIElement> = levelNavHTML.querySelectorAll(
 const navListItems: HTMLLIElement[] = Array.from(navList);
 
 [currentValues.listItem] = navListItems;
+currentValues.listItem.classList.add('level-nav_list-item__active');
 
 leftImg.src = icon;
 rightImg.src = icon;
@@ -31,7 +32,9 @@ leftImg.addEventListener('click', () => {
   if (currentValues.currentInd !== 0) {
     currentValues.currentInd -= 1;
     currentValues.currentLevel = levels[currentValues.currentInd];
+    currentValues.listItem?.classList.remove('level-nav_list-item__active');
     currentValues.listItem = navListItems[currentValues.currentInd];
+    currentValues.listItem?.classList.add('level-nav_list-item__active');
     drawPage(currentValues);
   }
 });
@@ -40,7 +43,9 @@ rightImg.addEventListener('click', () => {
   if (currentValues.currentInd !== levels.length - 1) {
     currentValues.currentInd += 1;
     currentValues.currentLevel = levels[currentValues.currentInd];
+    currentValues.listItem?.classList.remove('level-nav_list-item__active');
     currentValues.listItem = navListItems[currentValues.currentInd];
+    currentValues.listItem?.classList.add('level-nav_list-item__active');
     drawPage(currentValues);
   }
 });
