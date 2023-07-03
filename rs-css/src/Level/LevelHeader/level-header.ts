@@ -1,8 +1,7 @@
 import htmlToElement from '../../utils/htmlToElement';
 import levelNavHTML from '../Nav/open-nav';
-import levels from '../LevelsContainer/levels-container';
-import drawMainPage from '../../utils/drawMainPage';
-import getCheckImg from '../../utils/getCheckImg';
+import { levels, currentValues } from '../LevelsContainer/levels-container';
+import drawPage from '../../utils/drawPage';
 
 const levelHeader = require('./level-header.html');
 const icon = String(require('../../assets/img/left.png'));
@@ -18,11 +17,7 @@ const navList: NodeListOf<HTMLLIElement> = levelNavHTML.querySelectorAll(
 );
 const navListItems: HTMLLIElement[] = Array.from(navList);
 
-const currentValues = {
-  currentInd: 0,
-  currentLevel: levels[0],
-  listItem: navListItems[0],
-};
+[currentValues.listItem] = navListItems;
 
 leftImg.src = icon;
 rightImg.src = icon;
@@ -37,23 +32,7 @@ leftImg.addEventListener('click', () => {
     currentValues.currentInd -= 1;
     currentValues.currentLevel = levels[currentValues.currentInd];
     currentValues.listItem = navListItems[currentValues.currentInd];
-    drawMainPage(currentValues.currentLevel);
-
-    const progress = <HTMLElement>levelHeaderHtml.querySelector('.progress');
-    progress.textContent = `Level ${currentValues.currentInd + 1} of ${
-      levels.length
-    }`;
-    if (progress.nextElementSibling) {
-      if (!currentValues.currentLevel.isCompleted) {
-        progress.nextElementSibling.remove();
-      }
-    } else if (currentValues.currentLevel.isCompleted) {
-      const img = getCheckImg();
-      const levelProgressHeader = <HTMLElement>(
-        document.querySelector('.level_progress-header')
-      );
-      levelProgressHeader.append(img);
-    }
+    drawPage(currentValues);
   }
 });
 
@@ -62,23 +41,7 @@ rightImg.addEventListener('click', () => {
     currentValues.currentInd += 1;
     currentValues.currentLevel = levels[currentValues.currentInd];
     currentValues.listItem = navListItems[currentValues.currentInd];
-    drawMainPage(currentValues.currentLevel);
-
-    const progress = <HTMLElement>levelHeaderHtml.querySelector('.progress');
-    progress.textContent = `Level ${currentValues.currentInd + 1} of ${
-      levels.length
-    }`;
-    if (progress.nextElementSibling) {
-      if (!currentValues.currentLevel.isCompleted) {
-        progress.nextElementSibling.remove();
-      }
-    } else if (currentValues.currentLevel.isCompleted) {
-      const img = getCheckImg();
-      const levelProgressHeader = <HTMLElement>(
-        document.querySelector('.level_progress-header')
-      );
-      levelProgressHeader.append(img);
-    }
+    drawPage(currentValues);
   }
 });
-export { levelHeaderHtml, currentValues };
+export default levelHeaderHtml;

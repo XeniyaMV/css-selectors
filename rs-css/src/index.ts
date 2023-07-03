@@ -1,11 +1,11 @@
 import './styles/style.scss';
 
-import {
-  levelHeaderHtml,
-  currentValues,
-} from './Level/LevelHeader/level-header';
+import levelHeaderHtml from './Level/LevelHeader/level-header';
 import levelNavHTML from './Level/Nav/open-nav';
-import levels from './Level/LevelsContainer/levels-container';
+import {
+  levels,
+  currentValues,
+} from './Level/LevelsContainer/levels-container';
 import getCheckImg from './utils/getCheckImg';
 import drawMainPage from './utils/drawMainPage';
 
@@ -31,7 +31,9 @@ answerSubmit.addEventListener('click', () => {
       const imgProgress = getCheckImg();
       const imgNav = getCheckImg();
       levelProgressHeader.append(imgProgress);
-      currentValues.listItem.append(imgNav);
+      if (currentValues.listItem) {
+        currentValues.listItem.append(imgNav);
+      }
       currentValues.currentLevel.isCompleted = true;
     }
   } else {
@@ -57,7 +59,9 @@ answer.addEventListener('keypress', (event) => {
         const imgProgress = getCheckImg();
         const imgNav = getCheckImg();
         levelProgressHeader.append(imgProgress);
-        currentValues.listItem.append(imgNav);
+        if (currentValues.listItem) {
+          currentValues.listItem.append(imgNav);
+        }
         currentValues.currentLevel.isCompleted = true;
       }
     } else {

@@ -1,7 +1,8 @@
 import './style.scss';
 
-import levels from '../LevelsContainer/levels-container';
+import { levels, currentValues } from '../LevelsContainer/levels-container';
 import htmlToElement from '../../utils/htmlToElement';
+import drawPage from '../../utils/drawPage';
 
 const levelNav = require('./open-nav.html');
 
@@ -16,6 +17,15 @@ for (let i = 0; i < levels.length; i += 1) {
   span.textContent = levels[i].taskName;
   li.append(span);
   levelTaskList?.append(li);
+
+  li.addEventListener('click', () => {
+    console.log(currentValues);
+    currentValues.currentInd = i;
+    currentValues.currentLevel = levels[i];
+    currentValues.listItem = li;
+    drawPage(currentValues);
+    console.log(currentValues);
+  });
 }
 
 export default levelNavHTML;

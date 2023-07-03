@@ -5,6 +5,7 @@ import { tags as tags1, level1 } from '../Level1/level1';
 import { tags as tags2, level2 } from '../Level2/level2';
 import LevelTaskAnswers from '../level-task-answers';
 import LevelTaskNames from '../level-task-names';
+import CurrentLevel from '../LevelInterface/current-level-type';
 
 const levels: Level[] = [];
 levels.push({
@@ -22,4 +23,8 @@ levels.push({
   taskName: LevelTaskNames.LevelTask2,
 });
 
-export default levels;
+const currentValues: CurrentLevel = {
+  currentInd: 0,
+  currentLevel: levels[0],
+};
+export { levels, currentValues };
